@@ -45,7 +45,6 @@ const reviews = [
 
 const promoMessages = [
   { text: 'For inquiries, please contact us here: ', phone: '+1 (562) 451-5530', email: 'support@trifhat.shop' },
-  { text: 'Free shipping on all orders above $150 across the United States and Europe.' },
 ];
 
 /* Drawn icons: one stroke weight, one family. */
