@@ -21,7 +21,7 @@ const features: { icon: 'pin' | 'bell' | 'shield' | 'lock' | 'signal' | 'tag'; t
   { icon: 'pin', title: 'Find My and Find Hub tracking', text: 'A card-thin tracker is sewn inside. See your pouch on the map from any iPhone or Android phone.' },
   { icon: 'bell', title: 'Left-behind alerts', text: 'Walk away from the pouch at a security tray, café or hotel and your phone tells you right away.' },
   { icon: 'shield', title: 'Cut-resistant strap and panels', text: 'A cable-core strap and reinforced panels stop slash-and-grab theft.' },
-  { icon: 'lock', title: 'Lockable zippers, breakaway buckle', text: 'Zippers lock shut, and a magnetic buckle holds firm against a yank yet releases safely if it has to.' },
+  { icon: 'lock', title: 'Locking zippers and buckle', text: 'Zippers lock shut, and a magnetic buckle holds firm against a yank yet releases safely if it has to.' },
   { icon: 'signal', title: 'Signal-blocking phone pocket', text: 'Drop your phone in and it goes fully dark: no calls, no tracking, no data, until you take it out.' },
   { icon: 'tag', title: 'NFC and QR return tag', text: 'Anyone who finds your pouch can tap or scan to contact you, without seeing your personal details.' },
 ];
@@ -44,10 +44,8 @@ const reviews = [
 ];
 
 const promoMessages = [
-  { text: 'Free US shipping on every TRIFHAT order.' },
-  { text: 'Secure checkout powered by Stripe.' },
-  { text: 'Shop with confidence: 30-day money-back guarantee.' },
-  { text: 'Questions? Call ', phone: '+1 (562) 451-5530' },
+  { text: 'For inquiries, please contact us here: ', phone: '+1 (562) 451-5530', email: 'support@trifhat.shop' },
+  { text: 'Free shipping on all orders above $150 across the United States and Europe.' },
 ];
 
 /* Drawn icons: one stroke weight, one family. */
@@ -144,6 +142,8 @@ export default function Home() {
         <span key={promoIndex} className="dealbar-message">
           {promoMessages[promoIndex].text}
           {promoMessages[promoIndex].phone && <a href="tel:+15624515530">{promoMessages[promoIndex].phone}</a>}
+          {promoMessages[promoIndex].phone && promoMessages[promoIndex].email && ' or '}
+          {promoMessages[promoIndex].email && <a href="mailto:support@trifhat.shop">{promoMessages[promoIndex].email}</a>}
         </span>
       </p>
 
