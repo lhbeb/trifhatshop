@@ -16,9 +16,9 @@ const money = (amount: number, currency = 'USD') => new Intl.NumberFormat('en-US
 const dateTime = (iso: string) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(iso));
 
 function toCsv(orders: Order[]) {
-  const head = ['Order', 'Date', 'Status', 'Bundle', 'Amount', 'Currency', 'Name', 'Email', 'Phone', 'Address', 'City', 'State', 'Postal code', 'Country', 'Stripe session'];
+  const head = ['Order', 'Date', 'Status', 'Bundle', 'Amount', 'Currency', 'Name', 'Email', 'Phone', 'Address', 'City', 'State', 'Postal code', 'Country', 'Source'];
   const rows = orders.map(o => [o.number, o.createdAt, STATUS_LABEL[o.status], o.bundle, o.amount.toFixed(2), o.currency, o.customer.name, o.customer.email, o.customer.phone,
-    [o.shipping?.line1, o.shipping?.line2].filter(Boolean).join(', '), o.shipping?.city || '', o.shipping?.state || '', o.shipping?.postalCode || '', o.shipping?.country || '', o.id]);
+    [o.shipping?.line1, o.shipping?.line2].filter(Boolean).join(', '), o.shipping?.city || '', o.shipping?.state || '', o.shipping?.postalCode || '', o.shipping?.country || '', o.source]);
   return [head, ...rows].map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
 }
 
@@ -106,7 +106,7 @@ export default function OrdersDashboard({ orders, error, loadedAt }: { orders: O
           {!visible.length && !error && (
             <div className="admin-empty">
               <b>{orders.length ? 'No orders match this filter.' : 'No orders yet.'}</b>
-              <p>{orders.length ? 'Try another status or clear the search.' : 'Orders appear here as soon as a customer reaches Stripe checkout.'}</p>
+              <p>{orders.length ? 'Try another status or clear the search.' : 'Orders appear here once an order source is connected.'}</p>
             </div>
           )}
         </div>
@@ -129,11 +129,8 @@ export default function OrdersDashboard({ orders, error, loadedAt }: { orders: O
               <div><dt>Email</dt><dd>{open.customer.email ? <a href={`mailto:${open.customer.email}`}>{open.customer.email}</a> : '—'}</dd></div>
               <div><dt>Phone</dt><dd>{open.customer.phone ? <a href={`tel:${open.customer.phone}`}>{open.customer.phone}</a> : '—'}</dd></div>
               <div><dt>Ship to</dt><dd>{open.shipping ? <>{open.shipping.name && <>{open.shipping.name}<br /></>}{open.shipping.line1}{open.shipping.line2 && <><br />{open.shipping.line2}</>}<br />{open.shipping.city}{open.shipping.state ? `, ${open.shipping.state}` : ''} {open.shipping.postalCode}<br />{open.shipping.country}</> : '—'}</dd></div>
-              <div><dt>Stripe</dt><dd className="mono">{open.paymentIntent || open.id}</dd></div>
+              <div><dt>Source</dt><dd>{open.source === 'placeholder' ? 'Local admin preview' : open.source}</dd></div>
             </dl>
-            {open.paymentIntent && (
-              <a className="btn btn-primary" href={`https://dashboard.stripe.com/${open.livemode ? '' : 'test/'}payments/${open.paymentIntent}`} target="_blank" rel="noreferrer">Open in Stripe</a>
-            )}
           </aside>
         </div>
       )}
