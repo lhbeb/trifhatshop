@@ -375,3 +375,11 @@ legend { font-weight: 700; margin-bottom: 12px; font-size: 15px; }
 .payment-icons-light li { border: 1px solid var(--paper-deep); }
 .checkout-summary .payment-icons img { width: auto; height: auto; max-height: 22px; margin: 0; border-radius: 0; aspect-ratio: auto; background: none; mix-blend-mode: normal; }
 .checkout-summary .payment-icons li { height: 34px; min-width: 52px; }
+.order-confirm { margin: 32px 0; background: var(--card); border-radius: 22px; padding: 8px 28px; box-shadow: 0 30px 60px -45px rgba(18, 33, 58, .6); }
+.order-confirm-row { display: flex; justify-content: space-between; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--paper-deep); color: var(--ink-soft); }
+.order-confirm-row:last-child { border-bottom: 0; }
+.order-confirm-row b { color: var(--ink); text-align: right; }
+.order-confirm-total b { font-size: 22px; }
+.order-confirm-address b { font-weight: 500; line-height: 1.6; }
+.simple-main a:not(.back-home) { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: 3px; }
+.order-confirm .mono { font-family: var(--mono); font-size: 15px; }

@@ -6,15 +6,16 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { BUNDLES, isBundleId, type BundleId } from '../lib/checkout';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
-const bundles = { single: { label: '1 Pouch', price: '$320', amount: 32000 }, duo: { label: '2 Pouches', price: '$640', amount: 64000 }, family: { label: '3 Pouches', price: '$960', amount: 96000 } } as const;
 
 /** Loads Stripe's embedded checkout straight away (Stripe collects email, shipping address, phone and payment). */
 function CheckoutPageContent() {
   const search = useSearchParams();
-  const selected = (search.get('bundle') || 'single') as keyof typeof bundles;
-  const bundle = bundles[selected] || bundles.single;
+  const requested = search.get('bundle');
+  const selected: BundleId = isBundleId(requested) ? requested : 'single';
+  const bundle = BUNDLES[selected];
   const [clientSecret, setClientSecret] = useState('');
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
