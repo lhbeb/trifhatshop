@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const bundles = [
   { id: 'single', label: '1 Pouch', note: '$320 per pouch', price: '$320', amount: 32000 },
@@ -41,6 +41,13 @@ const reviews = [
   { quote: 'Saved our trip to Rome! Someone bumped into me on the crowded metro and tried going for my pockets, but my passport and cards were hidden under my t-shirt. They got absolutely nothing. Lifesaver.', from: 'Texas, USA' },
   { quote: 'I worried it would look bulky or feel sweaty under summer linen. The breathable mesh is incredible. It lies flat and disappears. You forget you’re wearing it.', from: 'California, USA' },
   { quote: 'Tested the RFID blocking with my apartment keycard scanner before Barcelona. Complete zero signal passed through. Dispatched super fast. 10/10.', from: 'Florida, USA' },
+];
+
+const promoMessages = [
+  { text: 'Free US shipping on every TRIFHAT order.' },
+  { text: 'Secure checkout powered by Stripe.' },
+  { text: 'Shop with confidence: 30-day money-back guarantee.' },
+  { text: 'Questions? Call ', phone: '+1 (562) 451-5530' },
 ];
 
 /* Drawn icons: one stroke weight, one family. */
@@ -108,6 +115,7 @@ function PassportScene() {
 
 export default function Home() {
   const [selected, setSelected] = useState('single');
+  const [promoIndex, setPromoIndex] = useState(0);
   const [activeImage, setActiveImage] = useState(0);
   const [touchX, setTouchX] = useState<number | null>(null);
   const showImage = (index: number) => setActiveImage((index + productImages.length) % productImages.length);
@@ -115,6 +123,13 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [checkingOut, setCheckingOut] = useState(false);
   const bundle = bundles.find(item => item.id === selected) || bundles[0];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setPromoIndex(index => (index + 1) % promoMessages.length);
+    }, 3600);
+    return () => window.clearInterval(timer);
+  }, []);
 
   function beginCheckout() {
     setCheckingOut(true);
@@ -125,7 +140,12 @@ export default function Home() {
 
   return (
     <main className="lp">
-      <p className="dealbar">Free US shipping, secure Stripe checkout and a 30-day money-back guarantee.</p>
+      <p className="dealbar" aria-live="polite">
+        <span key={promoIndex} className="dealbar-message">
+          {promoMessages[promoIndex].text}
+          {promoMessages[promoIndex].phone && <a href="tel:+15624515530">{promoMessages[promoIndex].phone}</a>}
+        </span>
+      </p>
 
       <header className="site-header">
         <a className="logo" href="#top" aria-label="TRIFHAT home"><Image className="brand-logo" src="/trifhat-logo-ink.svg" alt="TRIFHAT" width={150} height={29} priority unoptimized /></a>
@@ -310,7 +330,7 @@ export default function Home() {
         </nav>
         <div className="footer-company">
           <h3>Company</h3>
-          <p>TRIFHAT LLC, Entity ID #7473826<br />Roswell, NM 88201, United States</p>
+          <p>TRIFHAT LLC<br />Roswell, NM 88201, United States<br /><a href="tel:+15624515530">+1 (562) 451-5530</a></p>
         </div>
         <p className="footer-legal">© 2026 TRIFHAT LLC. All rights reserved.</p>
       </footer>

@@ -50,8 +50,12 @@ p { text-wrap: pretty; }
 /* ---------- Landing ---------- */
 .lp { overflow-x: clip; }
 
-.dealbar { margin: 0; background: var(--navy); color: rgba(255, 255, 255, .82); text-align: center; font-size: 14px; padding: 9px var(--pad); }
-.dealbar b { color: var(--lime); font-weight: 700; }
+.dealbar { min-height: 40px; margin: 0; background: var(--navy); color: rgba(255, 255, 255, .82); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; line-height: 1.35; padding: 8px var(--pad); overflow: hidden; }
+.dealbar-message { display: inline-block; animation: promo-message-in .55s cubic-bezier(.2, .8, .2, 1) both; }
+.dealbar a { color: var(--lime); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; white-space: nowrap; }
+.dealbar a:hover { color: #fff; }
+@keyframes promo-message-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .dealbar-message { animation: none; } }
 
 .site-header { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 36px; padding: 16px var(--pad); background: rgba(237, 242, 236, .88); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px); box-shadow: 0 1px 0 var(--rule); }
 .brand-logo { display: block; width: 150px; height: auto; }
