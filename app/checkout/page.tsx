@@ -6,7 +6,9 @@ import { FormEvent, Suspense, useMemo, useState } from 'react';
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
+// Stripe test-mode publishable key, hardcoded on request (no env var).
+const STRIPE_TEST_PUBLISHABLE_KEY = 'pk_test_51UHaDLRo2TKeAOq8qGAsGGvgoics9p36je20qoTk2Yj0SY7RAFitIGd6fDUcMfF8pIUCeVZcyj2fJnQznrJGSnO700uglueIkS';
+const stripePromise = loadStripe(STRIPE_TEST_PUBLISHABLE_KEY);
 const bundles = { single: { label: '1 Pouch', price: '$320', amount: 32000 }, duo: { label: '2 Pouches', price: '$640', amount: 64000 }, family: { label: '3 Pouches', price: '$960', amount: 96000 } } as const;
 type FormState = { name: string; email: string; address: string; city: string; state: string; postalCode: string; country: string };
 

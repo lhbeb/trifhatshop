@@ -6,7 +6,7 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer" id="contact">
       <div className="footer-brand">
-        <Image className="brand-logo" src="/trifhat-logo-light.svg" alt="TRIFHAT" width={150} height={29} unoptimized />
+        <Image className="brand-logo" src="/trifhat logo.svg" alt="TRIFHAT" width={150} height={29} unoptimized />
         <p>Travel security accessories with built-in tracking, a cut-resistant build and RFID protection.</p>
         <a className="footer-email" href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
       </div>

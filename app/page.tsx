@@ -147,7 +147,7 @@ export default function Home() {
       </p>
 
       <header className="site-header">
-        <a className="logo" href="#top" aria-label="TRIFHAT home"><Image className="brand-logo" src="/trifhat-logo-ink.svg" alt="TRIFHAT" width={150} height={29} priority unoptimized /></a>
+        <a className="logo" href="#top" aria-label="TRIFHAT home"><Image className="brand-logo" src="/trifhat logo.svg" alt="TRIFHAT" width={150} height={29} priority unoptimized /></a>
         <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Main">
           <a href="#order" onClick={close}>Shop</a>
           <a href="#features" onClick={close}>Features</a>

@@ -58,6 +58,7 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) { .dealbar-message { animation: none; } }
 
 .site-header { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 36px; padding: 16px var(--pad); background: rgba(237, 242, 236, .88); backdrop-filter: saturate(140%) blur(12px); -webkit-backdrop-filter: saturate(140%) blur(12px); box-shadow: 0 1px 0 var(--rule); }
+.site-header .logo { display: inline-flex; align-items: center; background: var(--navy); padding: 9px 14px; border-radius: 10px; line-height: 0; }
 .brand-logo { display: block; width: 150px; height: auto; }
 .nav { display: flex; gap: 28px; margin-left: auto; font-size: 15px; font-weight: 600; color: var(--ink-soft); }
 .nav a { padding: 6px 0; transition: color .15s; }
