@@ -208,7 +208,9 @@ legend { font-weight: 700; margin-bottom: 12px; font-size: 15px; }
 .site-footer nav a:hover, .footer-email:hover { color: var(--lime); }
 .footer-brand p { max-width: 34ch; margin: 18px 0; }
 .footer-email { color: #fff; font-weight: 700; }
+.footer-company { font-style: normal; }
 .footer-company p { margin: 0; line-height: 1.7; }
+.footer-company a:hover { color: var(--lime); }
 .footer-legal { grid-column: 1 / -1; margin: 24px 0 0; font-size: 13px; color: rgba(255, 255, 255, .5); }
 
 /* ---------- Secondary pages (FAQ, policies, contact, checkout) ---------- */

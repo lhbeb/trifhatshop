@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import SiteFooter from './components/SiteFooter';
+import { BUSINESS } from './components/business';
 
 export const metadata: Metadata = {
   title: 'TRIFHAT™ | Secure Travel Gear',
@@ -9,6 +11,32 @@ export const metadata: Metadata = {
   icons: { icon: '/trifhat-logo-ink.svg' },
 };
 
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: BUSINESS.legalName,
+  url: BUSINESS.url,
+  email: BUSINESS.email,
+  telephone: BUSINESS.phone,
+  founder: { '@type': 'Person', name: BUSINESS.owner },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: BUSINESS.street,
+    addressLocality: BUSINESS.city,
+    addressRegion: BUSINESS.region,
+    postalCode: BUSINESS.postalCode,
+    addressCountry: BUSINESS.countryCode,
+  },
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return (
+    <html lang="en">
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }} />
+        {children}
+        <SiteFooter />
+      </body>
+    </html>
+  );
 }

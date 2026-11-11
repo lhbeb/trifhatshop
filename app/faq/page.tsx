@@ -5,7 +5,7 @@ const questions = [
   ['What fits inside the pouch?', 'The slim compartments fit a passport, several cards or IDs, boarding passes, cash, and many standard smartphones. Pack only what you need so the pouch stays comfortable and flat.'],
   ['Will it be comfortable in warm weather?', 'Yes. The rear panel uses breathable mesh and the low-profile design sits close to the body under a shirt or light jacket.'],
   ['How fast do orders ship?', 'Orders are prepared within 24–48 business hours. Standard domestic delivery typically arrives within 3–5 business days after dispatch.'],
-  ['What is the return policy?', 'Contact support@trifhat.shop within 30 days of delivery if you change your mind or have a product issue.'],
+  ['What is the return policy?', 'Contact contact@trifhat.shop within 30 days of delivery if you change your mind or have a product issue.'],
   ['Is checkout secure?', 'Payments are processed by Stripe. TRIFHAT does not receive or store your full card number.'],
 ];
 

@@ -34,7 +34,7 @@ const faqs = [
   ['Will it fit my passport and phone?', 'The multi-compartment design fits international passports, up to six cards or IDs, boarding passes, currency, and standard smartphones.'],
   ['Is it comfortable in hot weather?', 'Yes. The rear panel uses a breathable, hypoallergenic air-mesh material that wicks away moisture and reduces chafing.'],
   ['How quickly will my order arrive?', 'Orders dispatch within 24–48 business hours from Roswell, New Mexico. Standard domestic delivery typically arrives within 3–5 business days.'],
-  ['What if I change my mind?', 'We offer a risk-free 30-day money-back guarantee. Contact support@trifhat.shop for a full refund.'],
+  ['What if I change my mind?', 'We offer a risk-free 30-day money-back guarantee. Contact contact@trifhat.shop for a full refund.'],
 ];
 
 const reviews = [
@@ -44,7 +44,7 @@ const reviews = [
 ];
 
 const promoMessages = [
-  { text: 'For inquiries, please contact us here: ', phone: '+1 (562) 451-5530', email: 'support@trifhat.shop' },
+  { text: 'For inquiries, please contact us here: ', phone: '+1 (562) 451-5530', email: 'contact@trifhat.shop' },
 ];
 
 /* Drawn icons: one stroke weight, one family. */
@@ -142,7 +142,7 @@ export default function Home() {
           {promoMessages[promoIndex].text}
           {promoMessages[promoIndex].phone && <a href="tel:+15624515530">{promoMessages[promoIndex].phone}</a>}
           {promoMessages[promoIndex].phone && promoMessages[promoIndex].email && ' or '}
-          {promoMessages[promoIndex].email && <a href="mailto:support@trifhat.shop">{promoMessages[promoIndex].email}</a>}
+          {promoMessages[promoIndex].email && <a href="mailto:contact@trifhat.shop">{promoMessages[promoIndex].email}</a>}
         </span>
       </p>
 
@@ -181,6 +181,7 @@ export default function Home() {
         <li><Icon name="lock" />Secure Stripe checkout</li>
         <li><Icon name="return" />30-day money-back guarantee</li>
         <li><Icon name="flag" />Ships from the USA</li>
+        <li><Icon name="plane" />Free US shipping</li>
       </ul>
 
       <section className="order" id="order">
@@ -306,33 +307,6 @@ export default function Home() {
         <a className="btn btn-lime" href="#order">Claim your RFID pouch <Icon name="arrow" size={18} /></a>
       </section>
 
-      <footer className="site-footer" id="contact">
-        <div className="footer-brand">
-          <Image className="brand-logo" src="/trifhat-logo-light.svg" alt="TRIFHAT" width={150} height={29} unoptimized />
-          <p>Travel security accessories built with heavy-gauge materials and RFID protection.</p>
-          <a className="footer-email" href="mailto:support@trifhat.shop">support@trifhat.shop</a>
-        </div>
-        <nav aria-label="Store">
-          <h3>Store</h3>
-          <a href="#order">Order the travel pouch</a>
-          <a href="#why">Why TRIFHAT</a>
-          <a href="#reviews">Reviews</a>
-          <a href="/faq">FAQ</a>
-          <a href="/contact">Contact</a>
-        </nav>
-        <nav aria-label="Policies">
-          <h3>Policies</h3>
-          <a href="/shipping">Shipping and delivery</a>
-          <a href="/returns">Refunds and returns</a>
-          <a href="/terms">Terms of service</a>
-          <a href="/privacy">Privacy policy</a>
-        </nav>
-        <div className="footer-company">
-          <h3>Company</h3>
-          <p>TRIFHAT LLC<br />Roswell, NM 88201, United States<br /><a href="tel:+15624515530">+1 (562) 451-5530</a></p>
-        </div>
-        <p className="footer-legal">© 2026 TRIFHAT LLC. All rights reserved.</p>
-      </footer>
     </main>
   );
 }
