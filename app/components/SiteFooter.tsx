@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import { BUSINESS } from './business';
+import PaymentIcons from './PaymentIcons';
 
 /** Shared footer with the full business details, rendered on every page from the root layout. */
 export default function SiteFooter() {
   return (
     <footer className="site-footer" id="contact">
       <div className="footer-brand">
-        <Image className="brand-logo" src="/trifhat logo.svg" alt="TRIFHAT" width={150} height={29} unoptimized />
+        <img className="brand-logo" src="/trifhat logo.svg" alt="TRIFHAT" width={150} height={29} />
         <p>Travel security accessories with built-in tracking, a cut-resistant build and RFID protection.</p>
         <a className="footer-email" href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+        <a className="footer-email" href={`tel:${BUSINESS.phone}`}>{BUSINESS.phoneDisplay}</a>
       </div>
       <nav aria-label="Store">
         <h3>Store</h3>
@@ -37,6 +39,7 @@ export default function SiteFooter() {
           <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
         </p>
       </address>
+      <div className="footer-payments"><PaymentIcons /></div>
       <p className="footer-legal">© {new Date().getFullYear()} {BUSINESS.legalName}, {BUSINESS.street}, {BUSINESS.city}, {BUSINESS.region} {BUSINESS.postalCode}, {BUSINESS.country}. All rights reserved.</p>
     </footer>
   );

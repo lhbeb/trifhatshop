@@ -1,41 +1,25 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import SiteFooter from './components/SiteFooter';
-import { BUSINESS } from './components/business';
+import FooterGate from './components/FooterGate';
+import { JsonLd, siteGraph } from './lib/seo';
 
 export const metadata: Metadata = {
-  title: 'TRIFHAT™ | Secure Travel Gear',
+  title: { default: 'TRIFHAT™ | Secure Travel Gear', template: '%s | TRIFHAT™' },
   description: 'The ultra-slim travel pouch with built-in Find My and Find Hub tracking, a cut-resistant build and RFID shielding.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://trifhat.shop'),
-  alternates: { canonical: 'https://trifhat.shop' },
-  icons: { icon: '/trifhat-logo-ink.svg' },
-};
-
-const organizationLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: BUSINESS.legalName,
-  url: BUSINESS.url,
-  email: BUSINESS.email,
-  telephone: BUSINESS.phone,
-  founder: { '@type': 'Person', name: BUSINESS.owner },
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: BUSINESS.street,
-    addressLocality: BUSINESS.city,
-    addressRegion: BUSINESS.region,
-    postalCode: BUSINESS.postalCode,
-    addressCountry: BUSINESS.countryCode,
-  },
+  openGraph: { siteName: 'TRIFHAT', locale: 'en_US', type: 'website', images: ['/images/trifhat-product.jpg'] },
+  twitter: { card: 'summary_large_image' },
+  icons: { icon: '/trifhat logo.svg' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }} />
+        <JsonLd data={siteGraph} />
         {children}
-        <SiteFooter />
+        <FooterGate><SiteFooter /></FooterGate>
       </body>
     </html>
   );
