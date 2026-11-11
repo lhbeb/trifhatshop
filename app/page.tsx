@@ -17,7 +17,19 @@ const productImages = [
   { src: '/images/trifhat-top.jpg', alt: 'TRIFHAT top profile' },
 ];
 
+const features: { icon: 'pin' | 'bell' | 'shield' | 'lock' | 'signal' | 'tag'; title: string; text: string }[] = [
+  { icon: 'pin', title: 'Find My and Find Hub tracking', text: 'A card-thin tracker is sewn inside. See your pouch on the map from any iPhone or Android phone.' },
+  { icon: 'bell', title: 'Left-behind alerts', text: 'Walk away from the pouch at a security tray, café or hotel and your phone tells you right away.' },
+  { icon: 'shield', title: 'Cut-resistant strap and panels', text: 'A cable-core strap and reinforced panels stop slash-and-grab theft.' },
+  { icon: 'lock', title: 'Lockable zippers, breakaway buckle', text: 'Zippers lock shut, and a magnetic buckle holds firm against a yank yet releases safely if it has to.' },
+  { icon: 'signal', title: 'Signal-blocking phone pocket', text: 'Drop your phone in and it goes fully dark: no calls, no tracking, no data, until you take it out.' },
+  { icon: 'tag', title: 'NFC and QR return tag', text: 'Anyone who finds your pouch can tap or scan to contact you, without seeing your personal details.' },
+];
+
 const faqs = [
+  ['Which phones work with the tracker?', 'The built-in tracker works with Apple Find My on iPhone and Google Find Hub on Android. Set it up once in the app you already have; no TRIFHAT app or subscription is needed.'],
+  ['How do left-behind alerts work?', 'Your phone notifies you when it moves away from the pouch, so you know before you leave the security line, café or hotel room.'],
+  ['Can thieves cut the strap?', 'The strap has a cut-resistant cable core and the panels are reinforced, so a quick slash-and-grab will not get through.'],
   ['How does the RFID protection work?', 'The inner layer uses electromagnetic shielding fabric certified to block 13.56 MHz and higher RFID/NFC frequencies, helping prevent portable skimmers from reading your cards and ID.'],
   ['Will it fit my passport and phone?', 'The multi-compartment design fits international passports, up to six cards or IDs, boarding passes, currency, and standard smartphones.'],
   ['Is it comfortable in hot weather?', 'Yes. The rear panel uses a breathable, hypoallergenic air-mesh material that wicks away moisture and reduces chafing.'],
@@ -32,9 +44,13 @@ const reviews = [
 ];
 
 /* Drawn icons: one stroke weight, one family. */
-function Icon({ name, size = 20 }: { name: 'check' | 'shield' | 'plane' | 'lock' | 'return' | 'flag' | 'arrow' | 'chevron' | 'plus' | 'menu' | 'close' | 'star'; size?: number }) {
+function Icon({ name, size = 20 }: { name: 'pin' | 'bell' | 'signal' | 'tag' | 'check' | 'shield' | 'plane' | 'lock' | 'return' | 'flag' | 'arrow' | 'chevron' | 'plus' | 'menu' | 'close' | 'star'; size?: number }) {
   const common = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true };
   switch (name) {
+    case 'pin': return <svg {...common}><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.4" /></svg>;
+    case 'bell': return <svg {...common}><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15L6 16.5Z" /><path d="M10 20.5a2.2 2.2 0 0 0 4 0" /></svg>;
+    case 'signal': return <svg {...common}><path d="M4 19 20 5" /><path d="M8 19v-3M12 19v-6M16 19V9" /></svg>;
+    case 'tag': return <svg {...common}><path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1.4 1.4 0 0 1 0 2l-6.4 6.4a1.4 1.4 0 0 1-2 0l-8.6-8Z" /><circle cx="8" cy="8" r="1.5" /></svg>;
     case 'check': return <svg {...common}><path d="m5 12.5 4.2 4.2L19 7" /></svg>;
     case 'shield': return <svg {...common}><path d="M12 3 4.8 6v5.6c0 4.3 3 8 7.2 9.4 4.2-1.4 7.2-5.1 7.2-9.4V6L12 3Z" /><path d="m8.8 12 2.2 2.2 4.3-4.6" /></svg>;
     case 'plane': return <svg {...common}><path d="M10.5 13.5 3 11l1.2-1.6 8 .9 4.6-5.1a1.9 1.9 0 0 1 2.9 2.6l-5 4.7.8 8-1.6 1.2-2.5-7.5-3 2.8.2 2.5L7.4 21l-1.2-3.3L3 16.5l1.3-1.2 2.4.2 3.8-2Z" /></svg>;
@@ -115,7 +131,7 @@ export default function Home() {
         <a className="logo" href="#top" aria-label="TRIFHAT home"><Image className="brand-logo" src="/trifhat-logo-ink.svg" alt="TRIFHAT" width={150} height={29} priority unoptimized /></a>
         <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Main">
           <a href="#order" onClick={close}>Shop</a>
-          <a href="#why" onClick={close}>Why TRIFHAT</a>
+          <a href="#features" onClick={close}>Features</a>
           <a href="#reviews" onClick={close}>Reviews</a>
           <a href="/faq" onClick={close}>FAQ</a>
           <a href="/contact" onClick={close}>Contact</a>
@@ -127,11 +143,11 @@ export default function Home() {
       <section className="hero" id="top">
         <div className="hero-copy">
           <h1>Keep your essentials invisible.</h1>
-          <p className="hero-lede">The ultra-slim RFID-blocking neck pouch that keeps your passport, cards, and cash out of reach of electronic thieves and pickpockets.</p>
+          <p className="hero-lede">The ultra-slim travel pouch with a built-in tracker, cut-resistant build and RFID shielding that keeps your passport, cards, and cash out of reach of thieves and skimmers.</p>
           <ul className="ticks">
-            <li><Icon name="check" size={18} />Military-grade RFID protection</li>
-            <li><Icon name="check" size={18} />0.15″ profile that disappears under clothing</li>
-            <li><Icon name="check" size={18} />Water-resistant ripstop with breathable mesh</li>
+            <li><Icon name="check" size={18} />Built-in Find My and Find Hub tracking</li>
+            <li><Icon name="check" size={18} />Cut-resistant strap and panels with lockable zippers</li>
+            <li><Icon name="check" size={18} />RFID shielding plus a signal-blocking phone pocket</li>
           </ul>
           <div className="hero-actions">
             <a className="btn btn-primary" href="#order">Order yours for $320 <Icon name="arrow" size={18} /></a>
@@ -177,7 +193,7 @@ export default function Home() {
         <div className="buybox">
           <div className="rating"><Stars /><span>4.9/5 from 1,420+ verified reviews</span></div>
           <h2>TRIFHAT™ Ultra-Slim RFID Hidden Travel Pouch</h2>
-          <p className="buy-intro">Military-grade protection against RFID skimmers, pickpockets, and identity theft.</p>
+          <p className="buy-intro">Find My and Find Hub tracking, a cut-resistant build and RFID shielding in one ultra-slim pouch.</p>
           <div className="price"><strong>{bundle.price}</strong>{bundle.id !== 'single' && <span className="price-each">$320 each</span>}</div>
           <fieldset>
             <legend>Choose your bundle</legend>
@@ -194,10 +210,24 @@ export default function Home() {
           </button>
           <p className="pay-note"><Icon name="lock" size={15} />Secure checkout by Stripe. Visa, Mastercard, Amex and Apple Pay accepted.</p>
           <ul className="perks">
-            <li><Icon name="shield" size={18} />Blocks RFID scanners</li>
-            <li><Icon name="check" size={18} />Breathable and anti-sweat</li>
-            <li><Icon name="check" size={18} />Fits every passport size</li>
+            <li><Icon name="pin" size={18} />Find My and Find Hub</li>
+            <li><Icon name="shield" size={18} />Cut-resistant build</li>
+            <li><Icon name="check" size={18} />Lifetime warranty</li>
           </ul>
+        </div>
+      </section>
+
+      <section className="features" id="features">
+        <h2>Smart security, built in.</h2>
+        <p className="section-sub">Everything a pickpocket or a skimmer would try, TRIFHAT already has an answer for.</p>
+        <div className="feature-grid">
+          {features.map(f => (
+            <article key={f.title}>
+              <span className="feature-icon"><Icon name={f.icon} size={22} /></span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -211,7 +241,9 @@ export default function Home() {
           <div><dt>Profile</dt><dd>0.15″</dd></div>
           <div><dt>RFID blocking</dt><dd>13.56 MHz</dd></div>
           <div><dt>Weight</dt><dd>1.8 oz</dd></div>
-          <div><dt>Shell</dt><dd>Water-resistant ripstop</dd></div>
+          <div><dt>Tracking</dt><dd>Find My and Find Hub</dd></div>
+          <div><dt>Strap</dt><dd>Cut-resistant cable core</dd></div>
+          <div><dt>Phone pocket</dt><dd>Signal-blocking</dd></div>
           <div><dt>Back panel</dt><dd>Breathable air-mesh</dd></div>
           <div><dt>Fits</dt><dd>Passport, 6 cards, phone</dd></div>
         </dl>

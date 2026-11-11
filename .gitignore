@@ -3,3 +3,5 @@ node_modules/
 out/
 .env*
 _source_20261110/
+_tf*
+_claude_tmp/
